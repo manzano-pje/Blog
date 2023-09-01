@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -29,4 +30,12 @@ public class Posts {
     /****
      * RELATIONS
      */
+
+    @ManyToOne
+    @JoinColumn(name = "posts_Id", insertable=false, updatable=false)
+    Users users;
+
+    @OneToMany(mappedBy = "posts")
+    List<Tags> listTags;
+
 }

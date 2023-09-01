@@ -23,4 +23,13 @@ public class Comments {
     /****
      * RELATIONS
      */
+
+    @ManyToOne
+    @JoinColumn(name = "comments_id", insertable = false, updatable = false)
+    Posts posts;
+
+    @ManyToOne
+    @JoinColumn(name = "users_id", insertable = false, updatable = false)
+    Users users;
+
 }

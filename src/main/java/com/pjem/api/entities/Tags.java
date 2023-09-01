@@ -18,4 +18,8 @@ public class Tags {
     /****
      * RELATIONS
      */
+
+    @ManyToOne
+    @JoinColumn(name = "tag_id", insertable = false, updatable = false)
+    Posts posts;
 }

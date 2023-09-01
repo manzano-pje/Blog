@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +27,10 @@ public class Users {
     /****
      * RELATIONS
      */
+
+    @OneToMany(mappedBy = "users")
+    List<Posts> listPost;
+
+    @OneToMany(mappedBy = "users")
+    List<Comments> listComments;
 }
