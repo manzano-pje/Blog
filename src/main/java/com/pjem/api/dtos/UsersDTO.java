@@ -13,7 +13,15 @@ public class UsersDTO {
     private String profilePicture;
     private String userType;
 
-    public UsersDTO(long idUser, String name, String email, String password, String profilePicture, String userType) {
+
+
+    public UsersDTO(long idUser,
+                    String name,
+                    String email,
+                    String password,
+                    String profilePicture,
+                    String userType) {
+
         this.idUser = idUser;
         this.name = name;
         this.email = email;
