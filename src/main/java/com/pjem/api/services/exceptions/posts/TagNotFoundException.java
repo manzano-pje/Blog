@@ -1,6 +1,6 @@
 package com.pjem.api.services.exceptions.posts;
 
-import com.pjem.api.services.exceptions.ErrorResponseException;
+import com.pjem.api.controllers.handler.ErrorResponseException;
 
 public class TagNotFoundException extends ErrorResponseException {
     public TagNotFoundException(){

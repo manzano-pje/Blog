@@ -1,19 +1,18 @@
 package com.pjem.api.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pjem.api.entities.Users;
 import lombok.Data;
 
 @Data
 public class UsersDTO {
 
+    private String password;
     private long idUser;
     private String name;
     private String email;
-    private String password;
     private String profilePicture;
     private String userType;
-
-
 
     public UsersDTO(long idUser,
                     String name,
@@ -38,4 +37,8 @@ public class UsersDTO {
             profilePicture = users.getProfilePicture();
             userType = users.getUserType();
      }
+
+    public UsersDTO() {
+
+    }
 }

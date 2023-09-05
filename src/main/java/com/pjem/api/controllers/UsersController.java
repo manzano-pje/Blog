@@ -21,15 +21,28 @@ public class UsersController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> create(@RequestBody UsersDTO usersDTO){
-        UserReturnDTO userReturn = usersService.create(usersDTO);
+        UserReturnDTO userReturnDto = usersService.create(usersDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").
-                buildAndExpand(userReturn.getIdUser()).toUri();
+                buildAndExpand(userReturnDto.getIdUser()).toUri();
         return ResponseEntity.created(uri).body("User created.");
     }
 
-    @GetMapping("/all_posts")
-    public List<UserReturnDTO> all_posts(){
+    @GetMapping("/profile/{id}")
+    public UserReturnDTO profile(@PathVariable Long id){
+        return usersService.profile(id);
+    }
 
-        return usersService.all_posts();
+    @PatchMapping("/update_profile/{id}")
+    public ResponseEntity<Object>  update_profile(@PathVariable long id, @RequestBody UsersDTO usersDTO){
+        UserReturnDTO userReturnDto =  usersService.update_profile(id, usersDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").
+                buildAndExpand(userReturnDto.getIdUser()).toUri();
+        return ResponseEntity.ok("User Updated.");
+    }
+
+    @DeleteMapping("profile/{id}")
+    public ResponseEntity<Object> delete_profile(@PathVariable Long id){
+        usersService.delete_profile(id);
+        return ResponseEntity.ok("User deleted.");
     }
 }

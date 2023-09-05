@@ -1,9 +1,4 @@
-package com.pjem.api.services.exceptions;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package com.pjem.api.controllers.handler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,13 +11,18 @@ public class ErrorResponseException extends RuntimeException {
         this.code = code;
         this.message = message;
     }
+    public Integer getCode() {
+        return code;
+    }
+    public String getMessage() {return message;}
 
     public Map<String, Object> paraJson() {
         Map<String, Object> json = new HashMap<>();
-        json.put("erro: ", code);
-        json.put("mensagem: ", message);
+        json.put("erro", code); // Remova os dois pontos extras (":") aqui
+        json.put("mensagem", message); // Remova os dois pontos extras (":") aqui
         return json;
     }
-
 }
+
+
 
