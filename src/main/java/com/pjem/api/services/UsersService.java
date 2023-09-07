@@ -7,6 +7,7 @@ import com.pjem.api.repositories.UsersRepository;
 import com.pjem.api.services.exceptions.users.UserNotFoundException;
 import com.pjem.api.services.exceptions.users.UserRegisteredException;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,16 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class UsersService {
     private final UsersRepository usersRepository;
     private final ModelMapper mapper;
-
-
-    public UsersService(UsersRepository usersRepository, ModelMapper mapper) {
-        this.usersRepository = usersRepository;
-        this.mapper = mapper;
-    }
 
     public UserReturnDTO create(UsersDTO usersDTO) {
         Optional<Users> usersOptional = usersRepository.findByEmail(usersDTO.getEmail());
@@ -34,12 +29,14 @@ public class UsersService {
         Users user = mapper.map(usersDTO, Users.class);
         user.setPassword(usersDTO.getPassword());
         usersRepository.save(user);
-        return  new UserReturnDTO(
-                user.getIdUser(),
-                user.getName(),
-                user.getEmail(),
-                user.getProfilePicture(),
-                user.getUserType());
+//        UserReturnDTO retorno = mapper.map(user, UserReturnDTO.class);
+        return
+                new UserReturnDTO(
+                        user.getIdUser(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getProfilePicture(),
+                        user.getUserType());
 
     }
 
@@ -57,15 +54,15 @@ public class UsersService {
 
     }
 
-    public UserReturnDTO update_profile(Long id, UsersDTO usersDTO){
+    public UserReturnDTO update_profile(Long id, UsersDTO usersDto){
         Optional<Users> userOptional = usersRepository.findById(id);
         if(userOptional.isEmpty()){
             throw new UserNotFoundException();
-
         }
-        userOptional.get().setIdUser(userOptional.get().getIdUser());
-        userOptional.get().setPassword(userOptional.get().getPassword());
-        usersRepository.save(userOptional.get());
+        Users user = mapper.map(usersDto, Users.class);
+        user.setIdUser(userOptional.get().getIdUser());
+        user.setPassword(userOptional.get().getPassword());
+        usersRepository.save(user);
 
         return  new UserReturnDTO(
                 userOptional.get().getIdUser(),
