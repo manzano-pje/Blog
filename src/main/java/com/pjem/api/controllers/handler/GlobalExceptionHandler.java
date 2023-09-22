@@ -1,4 +1,5 @@
 package com.pjem.api.controllers.handler;
+import com.pjem.api.services.exceptions.posts.PostNotFoundException;
 import com.pjem.api.services.exceptions.users.InvalidLoginException;
 import com.pjem.api.services.exceptions.users.UserNotFoundException;
 import com.pjem.api.services.exceptions.users.UserRegisteredException;
@@ -28,5 +29,13 @@ public class GlobalExceptionHandler {
         PersonalError erro = new PersonalError(ex.getCode(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(erro);
     }
+
+    @ExceptionHandler(PostNotFoundException.class)
+    public ResponseEntity<PersonalError> UserRegisteredException(PostNotFoundException ex) {
+        PersonalError erro = new PersonalError(ex.getCode(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
+
+
 
 }

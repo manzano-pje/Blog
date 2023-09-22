@@ -21,6 +21,8 @@ public class Posts {
 
     private long idUser;
     private String title;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private String content;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;

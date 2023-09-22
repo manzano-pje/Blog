@@ -1,11 +1,17 @@
 package com.pjem.api.dtos;
 
 import com.pjem.api.entities.Posts;
+import com.pjem.api.entities.Tags;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PostsDTO {
 
     private long idPost;
@@ -17,26 +23,16 @@ public class PostsDTO {
     private long likes;
     private String coverImage;
 
-    public PostsDTO(long idPost, long idUser, String title, String content, LocalDateTime createDate, LocalDateTime updateDate, long likes, String coverImage) {
-        this.idPost = idPost;
-        this.idUser = idUser;
-        this.title = title;
-        this.content = content;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-        this.likes = likes;
-        this.coverImage = coverImage;
+    public PostsDTO(Posts posts) {
+        this.idPost = posts.getIdPost();
+        this.idUser = posts.getIdUser();
+        this.title = posts.getTitle();
+        this.content = posts.getContent();
+        this.createDate = posts.getCreateDate();
+        this.updateDate = posts.getUpdateDate();
+        this.likes = posts.getLikes();
+        this.coverImage = posts.getCoverImage();
     }
 
-    public PostsDTO (Posts posts){
-        idPost = posts.getIdPost();
-        idUser = posts.getIdUser();
-        title = posts.getTitle();
-        content = posts.getContent();
-        createDate = posts.getCreateDate();
-        updateDate = posts.getUpdateDate();
-        likes = posts.getLikes();
-        coverImage = posts.getCoverImage();
-    }
 
 }
